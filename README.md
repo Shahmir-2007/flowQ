@@ -1,3 +1,14 @@
+---
+title: flowQ
+emoji: 🎫
+colorFrom: purple
+colorTo: pink
+sdk: docker
+app_port: 7860
+pinned: false
+short_description: Digital queue and appointment management system
+---
+
 # flowQ — Digital Queue & Appointment Management System
 
 FastAPI backend + Supabase (PostgreSQL) database + your flowQ web pages, all wired together.
@@ -100,6 +111,17 @@ you can't deactivate or demote yourself; the last active administrator can't be 
 | `ENFORCE_WORKING_HOURS` | `false` | `true` = walk-in tokens only during opening hours (`false` lets you demo at any time) |
 | `MAX_SKIPS` | `3` | skips before a no-show |
 | `JWT_EXPIRE_HOURS` | `12` | how long a login lasts |
+
+## Put it online (Hugging Face Spaces, free, no card)
+
+The `Dockerfile` and the settings block at the top of this README make the project a Docker Space.
+
+1. Create a Space at huggingface.co → **New Space** → SDK **Docker** → Blank → Public.
+2. In the Space: **Settings → Variables and secrets** → add **secrets** `DATABASE_URL` and `JWT_SECRET`,
+   and **variables** `APP_TIMEZONE=Asia/Karachi` (optional: `ENFORCE_WORKING_HOURS`, `MAX_SKIPS`).
+3. Push this project to the Space (password = a Hugging Face access token with *write* permission):
+   `git remote add space https://huggingface.co/spaces/USERNAME/flowq` then `git push space main`.
+4. Open `https://USERNAME-flowq.hf.space/api/health` — `{"status":"ok"}` means it's connected to Supabase.
 
 ## Not included
 
